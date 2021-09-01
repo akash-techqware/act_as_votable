@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %>as <%= current_user.email%></p>
+
+<h1>Movies</h1>
+<%= link_to 'New Movie', new_movie_path %>
+<hr>
+<% @movies.each do |movie| %>
+<div class="container">
+
+  <div class="col-sm-6 col-md-4 float-start" >
+    <div class="thumbnail thumb-box float-start">
+      <h2 style="text-align:center;"><%= movie.title %></h2>
+        <%= image_tag(movie.image, size: "250x300" )%>
+      <div class="caption" style= "text-aligh:center;">
+       
+        <%= link_to like_movie_path(movie), class:"like", method: :put do %>
+        <button type="button" class="btn btn-primary" aria-label="left-aligh">
+        <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden= "true "></span>
+        <span class="badge"><%= movie.get_upvotes.size %> </span>
+        </button>   
+          <% end %>
+
+         <%= link_to dislike_movie_path(movie), class:"like", method: :put do %>
+        <button type="button" class="btn btn-primary" aria-label="left-aligh">
+        <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden= "true "></span>
+        <span class="badge"><%= movie.get_downvotes.size %> </span>
+        </button>
+        <% end %>     
+      </div>
+    </div>
+  </div>
+  </div>
+<% end %>
+
